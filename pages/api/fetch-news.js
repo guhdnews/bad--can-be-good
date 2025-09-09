@@ -1,6 +1,6 @@
 // pages/api/fetch-news.js
 import Parser from 'rss-parser';
-import clientPromise from '../../lib/mongodb';
+import clientPromise from '../../lib/mongodb.js';
 
 const parser = new Parser({
   customFields: {
