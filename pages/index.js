@@ -6,6 +6,7 @@ export default function Home({ initialArticles }) {
   const [email, setEmail] = useState('');
   const [articles, setArticles] = useState(initialArticles);
   const [loading, setLoading] = useState(false);
+  const [debugInfo, setDebugInfo] = useState('');
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ export default function Home({ initialArticles }) {
       });
       const data = await response.json();
       alert(data.message);
-      setEmail(''); // Clear form on success
+      setEmail('');
     } catch (error) {
       alert('Subscription failed');
     }
@@ -25,18 +26,38 @@ export default function Home({ initialArticles }) {
 
   const refreshNews = async () => {
     setLoading(true);
+    setDebugInfo('Starting fetch...');
+    
     try {
-      const response = await fetch('/api/fetch-news', { method: 'POST' });
-      const data = await response.json();
+      console.log('Calling /api/fetch-news...');
+      const response = await fetch('/api/fetch-news', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       
-      if (response.ok) {
-        // Refresh the page to show new articles
-        window.location.reload();
-      } else {
-        alert('Failed to fetch new articles: ' + data.message);
+      setDebugInfo(`Response status: ${response.status}`);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        setDebugInfo(`Error ${response.status}: ${errorText}`);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
+      
+      const data = await response.json();
+      console.log('API Response:', data);
+      
+      setDebugInfo(`Success: ${data.message}`);
+      
+      // Refresh the page to show new articles after 2 seconds
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      
     } catch (error) {
-      alert('Error refreshing news');
+      console.error('Refresh error:', error);
+      setDebugInfo(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -82,6 +103,13 @@ export default function Home({ initialArticles }) {
           >
             {loading ? 'Fetching News...' : 'Refresh Latest News'}
           </button>
+          
+          {/* Debug Info */}
+          {debugInfo && (
+            <div className="mt-4 p-3 bg-gray-100 rounded-md text-sm text-gray-700 max-w-md mx-auto">
+              <strong>Debug:</strong> {debugInfo}
+            </div>
+          )}
         </div>
 
         {/* PayPal Donation Section */}
@@ -107,8 +135,8 @@ export default function Home({ initialArticles }) {
         
         <div className="grid gap-6 max-w-4xl mx-auto">
           {articles.length > 0 ? (
-            articles.map((article) => (
-              <article key={article._id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            articles.map((article, index) => (
+              <article key={article._id || index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
                 {article.imageUrl && (
                   <img 
                     src={article.imageUrl} 
@@ -168,18 +196,14 @@ export default function Home({ initialArticles }) {
 
 export async function getServerSideProps() {
   try {
-    // Get articles from database
     const articles = await getArticlesFromDB(10);
-    
     return { 
       props: { 
-        initialArticles: articles
+        initialArticles: articles || []
       } 
     };
   } catch (error) {
     console.error('Error in getServerSideProps:', error);
-    
-    // Fallback to empty array if database fails
     return {
       props: {
         initialArticles: []
