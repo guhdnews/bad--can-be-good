@@ -1,0 +1,176 @@
+{
+  "id": "upface_visual_testing",
+  "viewports": [
+    {
+      "label": "mobile",
+      "width": 375,
+      "height": 667
+    },
+    {
+      "label": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "label": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "label": "large_desktop",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "onBeforeScript": "puppet/onBefore.js",
+  "onReadyScript": "puppet/onReady.js",
+  "scenarios": [
+    {
+      "label": "Homepage Full",
+      "url": "http://localhost:3000",
+      "delay": 5000,
+      "readySelector": "body",
+      "hideSelectors": [],
+      "removeSelectors": ["[id*='marker']", "[class*='marker']", "[data-framer-motion]"],
+      "selectors": ["document"],
+      "misMatchThreshold": 3.0,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Homepage Header",
+      "url": "http://localhost:3000",
+      "delay": 3000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']", "[data-framer-motion]"],
+      "selectors": ["header"],
+      "misMatchThreshold": 2.0
+    },
+    {
+      "label": "Homepage Hero Section",
+      "url": "http://localhost:3000",
+      "delay": 6000,
+      "readySelector": "body",
+      "removeSelectors": ["[data-framer-motion]"],
+      "selectors": [".hero-section"],
+      "misMatchThreshold": 8.0
+    },
+    {
+      "label": "Homepage Buttons",
+      "url": "http://localhost:3000",
+      "delay": 4000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": [".btn"],
+      "misMatchThreshold": 1.0
+    },
+    {
+      "label": "Homepage CTA Section",
+      "url": "http://localhost:3000",
+      "delay": 4000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": [".cta-section"],
+      "misMatchThreshold": 15.0
+    },
+    {
+      "label": "Services Page Full",
+      "url": "http://localhost:3000/services",
+      "delay": 6000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": ["document"],
+      "misMatchThreshold": 10.0
+    },
+    {
+      "label": "Packages Page Full",
+      "url": "http://localhost:3000/packages",
+      "delay": 5000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": ["document"],
+      "misMatchThreshold": 18.0
+    },
+    {
+      "label": "Package Cards",
+      "url": "http://localhost:3000/packages",
+      "delay": 5000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": [".package-card"],
+      "misMatchThreshold": 30.0
+    },
+    {
+      "label": "About Page Full",
+      "url": "http://localhost:3000/about",
+      "delay": 6000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": ["document"],
+      "misMatchThreshold": 15.0
+    },
+    {
+      "label": "FAQ Page Full",
+      "url": "http://localhost:3000/faq",
+      "delay": 5000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": ["document"],
+      "misMatchThreshold": 10.0
+    },
+    {
+      "label": "Contact Page Full",
+      "url": "http://localhost:3000/contact",
+      "delay": 6000,
+      "readySelector": "body",
+      "removeSelectors": ["[id*='marker']", "[class*='marker']"],
+      "selectors": ["document"],
+      "misMatchThreshold": 40.0
+    },
+    {
+      "label": "Footer",
+      "url": "http://localhost:3000",
+      "delay": 2500,
+      "readySelector": "body",
+      "selectors": ["footer"],
+      "misMatchThreshold": 0.1
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser"],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "headless": "new",
+    "args": [
+      "--no-sandbox", 
+      "--disable-setuid-sandbox",
+      "--disable-web-security", 
+      "--disable-features=VizDisplayCompositor",
+      "--disable-dev-shm-usage",
+      "--disable-gpu",
+      "--disable-gpu-sandbox",
+      "--disable-software-rasterizer",
+      "--disable-background-timer-throttling",
+      "--disable-backgrounding-occluded-windows",
+      "--disable-renderer-backgrounding",
+      "--no-first-run",
+      "--force-color-profile=srgb",
+      "--disable-lcd-text",
+      "--disable-extensions",
+      "--disable-plugins",
+      "--font-render-hinting=none",
+      "--disable-font-subpixel-positioning"
+    ],
+    "timeout": 120000,
+    "waitUntil": ["load", "domcontentloaded", "networkidle0"]
+  },
+  "asyncCaptureLimit": 1,
+  "asyncCompareLimit": 25,
+  "debug": false,
+  "debugWindow": false
+}

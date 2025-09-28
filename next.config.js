@@ -2,9 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    esmExternals: false
-  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -15,7 +12,18 @@ const nextConfig = {
       }
     }
     return config
-  }
+  },
+  // Ensure both pages and app directories work during transition
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  images: {
+    domains: ['images.unsplash.com', 'via.placeholder.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

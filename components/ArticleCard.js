@@ -1,9 +1,13 @@
 // components/ArticleCard.js - Modern article card with social sharing
+'use client'
+
 import { useState } from 'react';
 
-export default function ArticleCard({ article }) {
+export default function ArticleCard({ article, onArticleClick }) {
   const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
   const [showShareMenu, setShowShareMenu] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   const shareArticle = (platform) => {
     const url = encodeURIComponent(article.link || window.location.href);
@@ -30,31 +34,65 @@ export default function ArticleCard({ article }) {
     // You could add a toast notification here
   };
 
+  const handleImageError = () => {
+    if (retryCount < 2) {
+      // Retry loading the image up to 2 times
+      setRetryCount(prev => prev + 1);
+      const img = new Image();
+      img.onload = () => setImageLoading(false);
+      img.onerror = () => {
+        setImageError(true);
+        setImageLoading(false);
+      };
+      img.src = article.imageUrl;
+    } else {
+      setImageError(true);
+      setImageLoading(false);
+    }
+  };
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
+  };
+
   return (
-    <article className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200">
+    <article className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-primary/30 dark:hover:border-primary/30">
       {/* Article Image */}
       <div className="relative h-48 overflow-hidden">
         {article.imageUrl && !imageError ? (
-          <img 
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-            src={article.imageUrl} 
-            alt={article.title}
-            onError={() => setImageError(true)}
-          />
+          <>
+            {imageLoading && (
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-100 via-orange-100 to-amber-100 dark:from-gray-700 dark:to-gray-600 animate-pulse flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-8 h-8 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                  <p className="text-xs text-gray-500">Loading image...</p>
+                </div>
+              </div>
+            )}
+            <img 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+              src={article.imageUrl} 
+              alt={article.title}
+              onError={handleImageError}
+              onLoad={handleImageLoad}
+              loading="lazy"
+            />
+          </>
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-blue-100 via-green-50 to-blue-50 flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-br from-yellow-200 via-orange-200 to-red-200 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
             <div className="text-center">
-              <svg className="w-12 h-12 mx-auto mb-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-12 h-12 mx-auto mb-2 text-yellow-600 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
               </svg>
-              <p className="text-sm font-medium text-blue-600">Good News</p>
+              <p className="text-sm font-medium text-yellow-700 dark:text-yellow-300">☀️ Positive News</p>
             </div>
           </div>
         )}
         
         {/* Source Badge */}
         <div className="absolute top-3 left-3">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/90 backdrop-blur-sm text-blue-700 border border-blue-200">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/90 backdrop-blur-sm text-primary border border-primary/30">
             {article.source || 'Positive News'}
           </span>
         </div>
@@ -64,7 +102,7 @@ export default function ArticleCard({ article }) {
           <div className="relative">
             <button
               onClick={() => setShowShareMenu(!showShareMenu)}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 shadow-sm"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm text-gray-600 hover:text-primary hover:bg-white transition-all duration-200 shadow-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
@@ -119,18 +157,24 @@ export default function ArticleCard({ article }) {
       {/* Article Content */}
       <div className="p-6">
         {/* Article Title */}
-        <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
+        <h3 
+          className="text-xl font-semibold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-primary transition-colors duration-200 cursor-pointer"
+          onClick={() => onArticleClick && onArticleClick(article)}
+        >
           {article.title}
         </h3>
 
         {/* Article Content */}
-        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+        <p 
+          className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3 cursor-pointer hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200"
+          onClick={() => onArticleClick && onArticleClick(article)}
+        >
           {article.content}
         </p>
 
         {/* Footer */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center text-sm text-gray-500">
+          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -145,7 +189,7 @@ export default function ArticleCard({ article }) {
               href={article.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors duration-200"
+              className="inline-flex items-center text-sm font-medium text-primary hover:text-secondary transition-colors duration-200"
             >
               Read More
               <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

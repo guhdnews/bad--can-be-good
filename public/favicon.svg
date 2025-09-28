@@ -1,0 +1,53 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF176" />
+      <stop offset="60%" stop-color="#FFB74D" />
+      <stop offset="100%" stop-color="#FF8A65" />
+    </radialGradient>
+    <linearGradient id="rayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFCC02" />
+      <stop offset="50%" stop-color="#FF9800" />
+      <stop offset="100%" stop-color="#F57C00" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle for contrast -->
+  <circle cx="50" cy="50" r="48" fill="#ffffff" opacity="0.9"/>
+  
+  <!-- Sun rays -->
+  <g>
+    <!-- Main rays -->
+    <path d="M50 8 L52 18 L48 18 Z" fill="url(#rayGrad)" opacity="0.8" />
+    <path d="M82 18 L80 22 L77 20 Z" fill="url(#rayGrad)" opacity="0.8" />
+    <path d="M92 50 L82 52 L82 48 Z" fill="url(#rayGrad)" opacity="0.8" />
+    <path d="M82 82 L77 80 L80 78 Z" fill="url(#rayGrad)" opacity="0.8" />
+    <path d="M50 92 L48 82 L52 82 Z" fill="url(#rayGrad)" opacity="0.8" />
+    <path d="M18 82 L20 78 L23 80 Z" fill="url(#rayGrad)" opacity="0.8" />
+    <path d="M8 50 L18 48 L18 52 Z" fill="url(#rayGrad)" opacity="0.8" />
+    <path d="M18 18 L23 20 L20 22 Z" fill="url(#rayGrad)" opacity="0.8" />
+    
+    <!-- Dot rays -->
+    <circle cx="50" cy="15" r="2" fill="url(#rayGrad)" opacity="0.6" />
+    <circle cx="73" cy="27" r="1.5" fill="url(#rayGrad)" opacity="0.6" />
+    <circle cx="85" cy="50" r="2" fill="url(#rayGrad)" opacity="0.6" />
+    <circle cx="73" cy="73" r="1.5" fill="url(#rayGrad)" opacity="0.6" />
+    <circle cx="50" cy="85" r="2" fill="url(#rayGrad)" opacity="0.6" />
+    <circle cx="27" cy="73" r="1.5" fill="url(#rayGrad)" opacity="0.6" />
+    <circle cx="15" cy="50" r="2" fill="url(#rayGrad)" opacity="0.6" />
+    <circle cx="27" cy="27" r="1.5" fill="url(#rayGrad)" opacity="0.6" />
+  </g>
+
+  <!-- Main sun circle -->
+  <circle cx="50" cy="50" r="25" fill="url(#sunGrad)" />
+  
+  <!-- Inner glow -->
+  <circle cx="50" cy="50" r="20" fill="rgba(255, 255, 255, 0.3)" />
+  
+  <!-- Simple smile -->
+  <path d="M40 58 Q50 68 60 58" stroke="rgba(255, 152, 0, 0.7)" stroke-width="3" fill="none" stroke-linecap="round" />
+  
+  <!-- Eyes -->
+  <circle cx="43" cy="45" r="2" fill="rgba(255, 152, 0, 0.6)" />
+  <circle cx="57" cy="45" r="2" fill="rgba(255, 152, 0, 0.6)" />
+</svg>

@@ -1,7 +1,19 @@
 {
   "functions": {
     "pages/api/**/*.js": {
-      "maxDuration": 30
+      "maxDuration": 60
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/fetch-news",
+      "schedule": "0 9 * * *"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/personalize",
+      "destination": "/quiz"
+    }
+  ]
 }

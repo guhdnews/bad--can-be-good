@@ -1,0 +1,484 @@
+```
+
+**C:\Users\PHELPS\Documents\upface-site\README.md**
+```
+# Upface - Modern Websites for Local Businesses
+
+![Upface Logo](public/assets/upface-logo.png)
+
+A modern, dark-themed website for **Upface**, a development agency specializing in websites and applications for local businesses. Built with Next.js, Tailwind CSS, Firebase, and deployed on Vercel.
+
+## 🚀 Features
+
+- **Modern Design**: Dark theme inspired by x.ai and warp.dev
+- **Responsive**: Mobile-first design with smooth animations
+- **Admin Dashboard**: CRM, content management, and freelancer panel
+- **Authentication**: Firebase Auth for secure admin access
+- **SEO Optimized**: Structured data, meta tags, and analytics ready
+- **Demo Showcase**: Interactive carousel of portfolio projects
+- **Contact Forms**: Ready for email service integration
+
+## 📋 Pages
+
+- **Home** (`/`) - Hero, value props, demo carousel, CTA
+- **Services** (`/services`) - Web dev, mobile apps, custom solutions
+- **Pricing** (`/pricing`) - Transparent pricing tiers
+- **Mission** (`/mission`) - Company mission and values
+- **About** (`/about`) - Company story and timeline
+- **Contact** (`/contact`) - Contact form and info
+- **FAQ** (`/faq`) - Common questions
+- **Demos** (`/demos`) - Portfolio showcase
+- **Admin** (`/admin`) - Protected dashboard (requires login)
+- **Login** (`/login`) - Authentication page
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **Authentication**: Firebase Auth
+- **Database**: Firebase Firestore
+- **Analytics**: Google Analytics (optional)
+- **Deployment**: Vercel
+
+## ⚡ Quick Start
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/guhdnews/upface-site.git
+   cd upface-site
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Edit `.env.local` with your Firebase config (see setup below).
+
+4. **Add your MidJourney assets**
+   Place generated images in `public/assets/`:
+   - `hero-nebula.png` - Homepage background
+   - `upface-logo.png` - Company logo
+   - `demo-*.png` - Demo thumbnails
+   - `upface-og-image.png` - Social media image
+
+5. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Visit the site**
+   Open [http://localhost:3000](http://localhost:3000)
+
+## 🔥 Firebase Setup
+
+1. **Create Firebase Project**
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create a new project named "upface-site"
+   - Enable Authentication and Firestore
+
+2. **Configure Authentication**
+   - Enable Email/Password provider
+   - Create your admin user:
+     ```
+     Email: admin@upface.dev
+     Password: your_secure_password
+     ```
+
+3. **Get Firebase Config**
+   - Go to Project Settings → General
+   - Add a web app and copy the config
+   - Update `.env.local` with your values:
+
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
+   NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:your_app_id
+   ```
+
+## 🎨 MidJourney Asset Generation
+
+Generate these images using MidJourney and place in `public/assets/`:
+
+### Required Assets:
+- `hero-nebula.png` - Dark space/nebula background for hero
+- `upface-logo.png` - Company logo (square format)
+- `upface-og-image.png` - Social media preview (1200x630)
+- `demo-restaurant-1.png` - Restaurant demo thumbnail
+- `demo-restaurant-2.png` - Restaurant demo alternate
+- `demo-construction-1.png` - Construction demo thumbnail
+- `demo-cleaning-app.png` - Cleaning app demo thumbnail
+- Plus additional demo thumbnails as needed
+
+### Sample MidJourney Prompts:
+```
+"Dark cosmic nebula background, minimalist, high contrast, purple and blue tones --ar 16:9"
+"Modern tech company logo, letter U, gradient blue, clean design --ar 1:1"
+"Restaurant website mockup, dark theme, modern interface --ar 16:10"
+```
+
+## 🚀 Deployment
+
+### Deploy to Vercel
+
+1. **Connect to GitHub**
+   - Push your code to GitHub
+   - Go to [Vercel](https://vercel.com)
+   - Import your repository
+
+2. **Add Environment Variables**
+   - In Vercel dashboard → Settings → Environment Variables
+   - Add all variables from `.env.local`
+
+3. **Deploy**
+   - Vercel will automatically deploy
+   - Get your live URL: `https://your-project.vercel.app`
+
+4. **Custom Domain** (Optional)
+   - Add your domain in Vercel dashboard
+   - Update DNS records as instructed
+   - Update `NEXT_PUBLIC_SITE_URL` environment variable
+
+## 📊 Analytics Setup
+
+1. **Google Analytics** (Optional)
+   - Create GA4 property
+   - Get Measurement ID
+   - Add to `.env.local`:
+   ```env
+   NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+   ```
+
+## 🔐 Admin Access
+
+1. **Login**: Visit `/login`
+2. **Demo Credentials** (if Firebase not set up):
+   - Email: `admin@upface.dev`
+   - Password: `upface2025`
+3. **Admin Dashboard**: Accessible at `/admin` after login
+
+### Admin Features:
+- **CRM**: Manage clients and projects
+- **Content**: Edit pages and demos
+- **Freelancers**: Track team performance
+- **Analytics**: Business metrics dashboard
+
+## 🎯 Business Model
+
+Upface targets local businesses with:
+- **Basic Plan**: $1,000 - Site revamp
+- **Pro Plan**: $3,000 - Site + app
+- **Enterprise**: $5,000 - Custom solutions
+
+### Target Niches:
+1. Restaurants (ordering, reservations)
+2. Construction (projects, quotes)
+3. Cleaning Services (booking, tracking)
+4. Gyms (classes, memberships)
+5. Auto Shops (services, appointments)
+6. Salons (booking, stylists)
+7. Retail (catalog, loyalty)
+8. Plumbing (scheduling, quotes)
+9. Venues (events, ticketing)
+10. General loyalty apps
+
+## 📝 Development Notes
+
+- Uses Tailwind CSS v4 syntax
+- Firebase runs in demo mode without config
+- All forms ready for backend integration
+- SEO optimized with structured data
+- Mobile-first responsive design
+- Dark theme throughout
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+**Built with ❤️ for local businesses everywhere**
+
+```
+
+
+
+
+
+**File Glob Results:**
+
+- **C:\Users\PHELPS\Documents\upface-site\components\Footer.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\components\Header.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\components\Layout.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\_app.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\_document.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\about.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\admin.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\api\hello.ts**
+- **C:\Users\PHELPS\Documents\upface-site\pages\contact.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\crm\clients\[id].tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\crm\clients\index.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\crm\clients\new.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\crm\follow-ups\index.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\crm\index.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\crm\inquiries\index.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\demos.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\faq.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\index.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\login.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\mission.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\packages.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\pricing.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\services.tsx**
+- **C:\Users\PHELPS\Documents\upface-site\pages\setup.tsx**
+
+
+
+
+**Files Read:**
+
+**C:\Users\PHELPS\Documents\upface-site\FIREBASE_SETUP.md**
+```
+# Firebase Integration Complete ✅
+
+## 🎯 Firebase Configuration
+
+Your Firebase project **`upface-site`** is now fully integrated with your CRM system.
+
+### 📋 What's Configured:
+
+1. **✅ Firestore Database** - `us-east1` region
+2. **✅ Authentication** - Ready for user management
+3. **✅ Security Rules** - Production-ready rules for CRM data
+4. **✅ Storage Rules** - File upload permissions for client documents
+5. **✅ Cloud Functions** - Ready (requires Blaze plan upgrade)
+6. **✅ Local Emulators** - Full development environment
+
+## 🔧 Local Development
+
+### Start Firebase Emulators:
+```bash
+firebase emulators:start
+```
+
+This will start:
+- **Auth Emulator**: http://localhost:9099
+- **Firestore Emulator**: http://localhost:8080  
+- **Functions Emulator**: http://localhost:5001
+- **Storage Emulator**: http://localhost:9199
+- **Emulator UI**: http://localhost:4000 (auto-assigned port)
+
+### Test Your CRM Locally:
+1. Run `firebase emulators:start`
+2. Run `npm run dev` (in another terminal)
+3. Visit `http://localhost:3000`
+4. Test contact forms, client creation, CRM functionality
+
+## 🚀 Production Status
+
+### ✅ Currently Working:
+- **Website**: https://upface-site-ap05g94i6-guhdnews-projects.vercel.app
+- **CRM Dashboard**: https://upface-site-ap05g94i6-guhdnews-projects.vercel.app/crm
+- **Admin Console**: https://upface-site-ap05g94i6-guhdnews-projects.vercel.app/admin
+- **Inquiries Manager**: https://upface-site-ap05g94i6-guhdnews-projects.vercel.app/crm/inquiries
+- **Firestore Database**: Live and configured
+- **Security Rules**: Deployed and active
+- **Cloud Functions**: Deployed and working
+  - Contact form processing: `processContactForm`
+  - Inquiry to client conversion: `convertInquiryToClient`
+  - Profile view logging: `logProfileView`
+  - Real-time triggers: `onNewInquiry`, `onClientUpdate`
+
+### ✅ Cloud Functions Status:
+**All Cloud Functions are deployed and working!**
+
+Active functions:
+- **processContactForm**: Handles contact form submissions
+- **convertInquiryToClient**: Converts inquiries to clients
+- **logProfileView**: Tracks profile views
+- **onNewInquiry**: Triggers on new inquiries
+- **onClientUpdate**: Triggers on client updates
+
+### 📁 To Enable Firebase Storage (Optional):
+1. Visit: https://console.firebase.google.com/project/upface-site/storage
+2. Click "Get Started" to set up Firebase Storage
+3. Then run: `firebase deploy --only storage`
+
+## 🔐 Security Features
+
+### Firestore Security Rules:
+- ✅ **Users** can only access their own profiles
+- ✅ **Clients** require proper permissions to view/edit
+- ✅ **Inquiries** can be created by public (contact forms)
+- ✅ **Admin users** have full access
+- ✅ **Role-based permissions** for all operations
+
+### Storage Security Rules:
+- ✅ **Client documents** - 10MB limit, specific file types
+- ✅ **User profiles** - 2MB limit, images only
+- ✅ **Company files** - Admin access only
+
+## 📊 CRM Features Available:
+
+### Real-time Functionality:
+- **Contact form submissions** → Automatic Firestore inquiries
+- **Client management** with full CRUD operations
+- **User authentication** and role-based access
+- **Interaction tracking** and history
+- **Follow-up system** with notifications
+- **Profile view logging** for user activity
+
+### Admin Features:
+- **Dashboard** with real-time statistics
+- **User management** with permissions
+- **Client overview** and management tools
+- **Inquiry processing** and conversion
+
+## 🛠️ Development Commands:
+
+```bash
+# Start local development
+npm run dev
+
+# Start Firebase emulators
+firebase emulators:start
+
+# Deploy security rules
+firebase deploy --only firestore:rules
+
+# Deploy storage rules (after setting up Storage in console)
+firebase deploy --only storage
+
+# Deploy functions (after upgrading to Blaze plan)
+firebase deploy --only functions
+
+# Build and deploy website
+npm run build
+vercel --prod
+```
+
+## 📱 Next Steps:
+
+1. **Test locally** with emulators
+2. **Create your first admin user** through Firebase Console
+3. **Upgrade to Blaze plan** when ready for Cloud Functions
+4. **Set up Firebase Storage** in console for file uploads
+5. **Customize CRM workflows** for your business needs
+
+Your CRM system is fully functional and ready for production use! 🎉
+```
+
+
+
+Perfect! Here's a comprehensive project description you can use for future Warp Code sessions:
+
+---
+
+## **Upface Site - Project Summary for Warp Code**
+
+### 🏗️ **Project Overview**
+**Upface** is a modern software agency website with integrated CRM system, targeting local businesses. Currently **deployed and live** at: `https://upface-site-b4s31g8s5-guhdnews-projects.vercel.app`
+
+**Location:** `C:\Users\PHELPS\Documents\upface-site` (Windows PowerShell environment)
+
+### 📋 **Tech Stack & Architecture**
+- **Framework:** Next.js 15.5.3 with TypeScript (Pages Router)
+- **Styling:** Tailwind CSS v4 with PostCSS
+- **Animation:** Framer Motion 
+- **Icons:** Lucide React
+- **Authentication:** Firebase Auth
+- **Database:** Firebase Firestore (fully configured and deployed)
+- **Charts:** Recharts
+- **Deployment:** Vercel (configured with vercel.json)
+- **Package Manager:** npm
+
+### 📁 **Project Structure**
+```
+upface-site/
+├── components/          # Reusable UI components
+├── pages/              # Next.js pages (20 total pages)
+│   ├── api/           # API routes
+│   ├── crm/           # CRM dashboard pages
+│   └── admin.tsx      # Admin dashboard
+├── public/assets/     # Static assets (MidJourney generated)
+├── firebase.json      # Firebase configuration
+├── vercel.json        # Vercel deployment config
+└── FIREBASE_SETUP.md  # Complete Firebase integration guide
+```
+### 🔥 **Firebase Integration Status**
+- ✅ **Fully configured and deployed**
+- ✅ **Firestore Database:** Production ready with security rules
+- ✅ **Cloud Functions:** 5 functions deployed and working
+- ✅ **Authentication:** Role-based access system
+- ✅ **Local Emulators:** Complete development environment
+- **Commands:** `firebase emulators:start` for local development
+
+### 🚀 **Deployment Status**
+- ✅ **Production Build:** Works perfectly (`npm run build`)
+- ✅ **Vercel Deployment:** Live and configured
+- ✅ **Security Headers:** Configured in vercel.json
+- ✅ **Environment Variables:** Firebase config set up
+- **Deploy Command:** `vercel --prod`
+
+### 📊 **Available Pages (20 total)**
+- **Public:** Home, Services, Pricing, About, Contact, FAQ, Demos, Mission
+- **Auth:** Login, Setup
+- **Protected:** Admin Dashboard, CRM (clients, inquiries, follow-ups)
+- **API:** `/api/hello` endpoint
+
+### 🎨 **Design System**
+- **Theme:** Dark mode inspired by x.ai and Warp.dev
+- **Assets:** MidJourney generated images in `public/assets/`
+- **Responsive:** Mobile-first design
+- **Colors:** Purple/blue gradient themes
+
+### ⚡ **Common Commands**
+```bash
+npm run dev          # Start development (localhost:3000)
+npm run build        # Build for production 
+npm run start        # Start production server
+npm run lint         # Run ESLint
+vercel --prod        # Deploy to production
+firebase emulators:start  # Start local Firebase
+```
+### 🚨 **Known Issues & Fixes**
+1. **Build Timeouts:** If `npm run build` hangs >120 seconds, cancel and retry
+2. **Firebase Emulators:** Always start before local development for CRM features
+3. **TypeScript:** Uses strict mode with `@/*` path aliases
+4. **Tailwind v4:** Uses new PostCSS plugin syntax
+
+### 🔐 **Authentication & Access**
+- **Admin Route:** `/admin` (protected)
+- **CRM Routes:** `/crm/*` (protected)
+- **Firebase Auth:** Email/password with role-based permissions
+- **Demo Mode:** Works without Firebase for static features
+
+### 📈 **Business Context**
+- **Target:** Local businesses (restaurants, construction, cleaning, etc.)
+- **Pricing:** $1,000-$5,000 packages
+- **CRM Features:** Client management, inquiries, follow-ups, analytics
+- **Demos:** Interactive portfolio showcase
+
+### 🛠️ **Development Environment**
+- **OS:** Windows 11
+- **Shell:** PowerShell 5.1
+- **Node.js:** Installed and working
+- **Vercel CLI:** v47.0.7 installed
+- **Firebase CLI:** Configured with project
