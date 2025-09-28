@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import ArticleCard from '../../components/ArticleCard.js'
+import EditorialArticleCard from '../../components/ui/editorial/ArticleCard.tsx'
 
 export default function HomePageClient({ initialArticles }) {
   const router = useRouter()
@@ -55,37 +55,37 @@ export default function HomePageClient({ initialArticles }) {
 
   return (
     <>
-      {/* Search and Filter Section */}
-      <div className="mb-12">
+      {/* Editorial Search and Filter Section */}
+      <div className="mb-12 border-b border-editorial-border pb-8">
         <div className="max-w-4xl mx-auto">
           {/* Search Bar */}
           <div className="mb-8">
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg className="h-5 w-5 text-editorial-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
               <input
                 type="text"
                 placeholder="Search positive stories..."
-                className="block w-full pl-10 pr-3 py-4 border border-gray-200 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm text-lg text-gray-900 dark:text-white transition-colors duration-200"
+                className="block w-full pl-12 pr-4 py-4 border-2 border-editorial-border rounded-lg leading-5 bg-editorial-bg placeholder-editorial-muted focus:outline-none focus:ring-2 focus:ring-editorial-primary focus:border-editorial-primary shadow-sm text-lg text-editorial-text transition-all duration-200 font-mono"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
 
-          {/* Category Filter */}
+          {/* Category Filter - Editorial Style */}
           <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border font-mono ${
                   selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary/10 dark:hover:bg-primary/10 hover:text-primary dark:hover:text-primary shadow-sm hover:shadow-md border border-gray-200 dark:border-gray-600'
+                    ? 'bg-editorial-primary text-white border-editorial-primary shadow-editorial'
+                    : 'bg-editorial-bg text-editorial-text border-editorial-border hover:border-editorial-primary hover:text-editorial-primary hover:shadow-sm'
                 }`}
               >
                 <span className="mr-2">{category.icon}</span>
@@ -176,27 +176,29 @@ export default function HomePageClient({ initialArticles }) {
       {/* Recent Articles Grid */}
       <div className="mb-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            More Positive Stories
+          <div className="text-center mb-8">
+            <h2 className="editorial-headline text-3xl mb-4">
+              Latest Stories
+            </h2>
             {searchTerm && (
-              <span className="block text-lg font-normal text-gray-600 dark:text-gray-400 mt-2">
+              <p className="editorial-caption">
                 {filteredArticles.length} results for "{searchTerm}"
-              </span>
+              </p>
             )}
-          </h2>
+          </div>
           
           {filteredArticles.length === 0 ? (
             <div className="text-center py-16">
               <div className="max-w-md mx-auto">
-                <div className="mb-6">
-                  <div className="w-24 h-24 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
-                    <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="mb-8">
+                  <div className="w-24 h-24 mx-auto bg-editorial-bg-secondary border-2 border-editorial-border rounded-full flex items-center justify-center">
+                    <svg className="w-12 h-12 text-editorial-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15" />
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">No stories found</h3>
-                <p className="text-gray-600 mb-6">
+                <h3 className="editorial-subheadline text-xl mb-4">No stories found</h3>
+                <p className="editorial-body text-base mb-8">
                   {searchTerm ? "Try adjusting your search or browse all categories" : "New positive stories are automatically added throughout the day. Check back soon!"}
                 </p>
                 <div className="space-y-4">
@@ -206,7 +208,7 @@ export default function HomePageClient({ initialArticles }) {
                         setSearchTerm('')
                         setSelectedCategory('all')
                       }}
-                      className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+                      className="editorial-button-primary inline-flex items-center hover:shadow-editorial transition-all duration-300"
                     >
                       <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -217,7 +219,7 @@ export default function HomePageClient({ initialArticles }) {
                   <div className="text-center">
                     <a
                       href="/#newsletter"
-                      className="inline-flex items-center text-primary hover:text-secondary transition-colors font-medium"
+                      className="inline-flex items-center text-editorial-primary hover:text-editorial-secondary transition-colors font-medium"
                     >
                       Subscribe to get notified of new stories
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,27 +232,39 @@ export default function HomePageClient({ initialArticles }) {
             </div>
           ) : (
             <>
-              {/* Responsive grid with article limits */}
-              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                {/* Mobile: show 3 articles, Desktop: show 6 articles */}
-                {filteredArticles.slice(0, 6).map((article, index) => {
-                  // Hide articles beyond mobile limit on small screens
-                  const hiddenOnMobile = index >= 3 ? 'hidden sm:block' : ''
-                  return (
-                    <div key={index} className={hiddenOnMobile}>
-                      <ArticleCard article={article} onArticleClick={handleArticleClick} />
+              {/* Editorial Article Grid */}
+              <div className="space-y-8">
+                {/* Featured Article */}
+                {filteredArticles.length > 0 && (
+                  <div className="mb-12">
+                    <EditorialArticleCard 
+                      article={filteredArticles[0]} 
+                      onArticleClick={handleArticleClick}
+                      variant="featured"
+                    />
+                  </div>
+                )}
+                
+                {/* Article Grid */}
+                <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
+                  {filteredArticles.slice(1, 9).map((article, index) => (
+                    <div key={index} className="animate-slide-in-view">
+                      <EditorialArticleCard 
+                        article={article} 
+                        onArticleClick={handleArticleClick}
+                      />
                     </div>
-                  )
-                })}
+                  ))}
+                </div>
               </div>
               
-              {filteredArticles.length > 6 && (
-                <div className="text-center mt-12">
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    Showing 6 of {filteredArticles.length} articles
+              {filteredArticles.length > 9 && (
+                <div className="text-center mt-12 pt-8 border-t border-editorial-border">
+                  <p className="editorial-caption mb-4">
+                    Showing 8 of {filteredArticles.length} articles
                   </p>
-                  <button className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300">
-                    View All Articles
+                  <button className="editorial-button-secondary hover:bg-editorial-primary hover:text-white transition-all duration-300">
+                    Load More Stories
                   </button>
                 </div>
               )}

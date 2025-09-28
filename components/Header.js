@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <header 
-      className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors duration-200" 
+      className="bg-editorial-bg border-b-2 border-editorial-border sticky top-0 z-50 transition-colors duration-200 shadow-editorial" 
       style={{ height: 'var(--header-height)' }}
       role="banner"
     >
@@ -31,51 +31,51 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium">
-              Home
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link href="/" className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide">
+              HOME
             </Link>
-            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium">
-              About
+            <Link href="/about" className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide">
+              ABOUT
             </Link>
-            <Link href="/mission" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium">
-              Mission
+            <Link href="/mission" className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide">
+              MISSION
             </Link>
-            <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium">
-              Contact
+            <Link href="/contact" className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide">
+              CONTACT
             </Link>
-            <Link href="/donate" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium">
-              Donate
+            <Link href="/donate" className="text-editorial-highlight hover:text-editorial-highlight transition-colors font-mono text-sm font-bold tracking-wide">
+              DONATE
             </Link>
             <ThemeToggle />
             {isLoggedIn ? (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-6">
                 <Link 
                   href="/account" 
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                  className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide"
                 >
-                  Account
+                  ACCOUNT
                 </Link>
                 <button 
                   onClick={logout}
-                  className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors font-medium"
+                  className="text-editorial-muted hover:text-red-600 transition-colors font-mono text-sm font-medium tracking-wide"
                 >
-                  Logout
+                  LOGOUT
                 </button>
               </div>
             ) : (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-6">
                 <button 
                   onClick={() => setShowAuthModal(true)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                  className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide"
                 >
-                  Login
+                  LOGIN
                 </button>
                 <Link 
                   href="/#newsletter" 
-                  className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-lg hover:shadow-md transition-all duration-300 font-medium"
+                  className="editorial-button-primary px-6 py-2 text-sm font-mono tracking-wide"
                 >
-                  Subscribe
+                  SUBSCRIBE
                 </Link>
               </div>
             )}
@@ -83,13 +83,13 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2" 
+            className="md:hidden p-2 rounded-md hover:bg-editorial-bg-secondary transition-colors" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
             data-testid="mobile-menu-button"
             type="button"
           >
-            <svg className="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-editorial-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
             </svg>
           </button>
@@ -97,42 +97,42 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg">
-            <div className="flex flex-col space-y-3">
+          <div className="md:hidden py-6 border-t-2 border-editorial-border bg-editorial-bg shadow-editorial">
+            <div className="flex flex-col space-y-4">
               <Link 
                 href="/" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide px-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                HOME
               </Link>
               <Link 
                 href="/about" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide px-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About
+                ABOUT
               </Link>
               <Link 
                 href="/mission" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide px-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Mission
+                MISSION
               </Link>
               <Link 
                 href="/contact" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide px-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                CONTACT
               </Link>
               <Link 
                 href="/donate" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                className="text-editorial-highlight hover:text-editorial-highlight transition-colors font-mono text-sm font-bold tracking-wide px-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Donate
+                DONATE
               </Link>
               <div className="pt-2">
                 <ThemeToggle />
@@ -142,19 +142,19 @@ export default function Header() {
                 <>
                   <Link 
                     href="/account" 
-                    className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium"
+                    className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide px-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Account
+                    ACCOUNT
                   </Link>
                   <button 
                     onClick={() => {
                       logout();
                       setIsMenuOpen(false);
                     }}
-                    className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors font-medium text-left"
+                    className="text-editorial-muted hover:text-red-600 transition-colors font-mono text-sm font-medium tracking-wide text-left px-2"
                   >
-                    Logout
+                    LOGOUT
                   </button>
                 </>
               ) : (
@@ -163,19 +163,21 @@ export default function Header() {
                     setShowAuthModal(true);
                     setIsMenuOpen(false);
                   }}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors font-medium text-left"
+                  className="text-editorial-text hover:text-editorial-primary transition-colors font-mono text-sm font-medium tracking-wide text-left px-2"
                 >
-                  Login
+                  LOGIN
                 </button>
               )}
               
-              <Link 
-                href="/#newsletter" 
-                className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-lg hover:shadow-md transition-all duration-300 font-medium text-center"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Subscribe
-              </Link>
+              <div className="px-2 pt-2">
+                <Link 
+                  href="/#newsletter" 
+                  className="editorial-button-primary block text-center py-3 font-mono text-sm tracking-wide"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  SUBSCRIBE
+                </Link>
+              </div>
             </div>
           </div>
         )}
